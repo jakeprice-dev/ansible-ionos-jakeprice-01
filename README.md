@@ -2,6 +2,8 @@
 
 This playbook configures a fresh VPS on [Ionos](https://www.ionos.co.uk/servers/vps) to host my blog [jakeprice.dev](https://jakeprice.dev).
 
+The blog repository can be found [here](https://github.com/jakeprice-dev/jakeprice.dev) and the theme [here](https://github.com/jakeprice-dev/jpd).
+
 ## Ansible Galaxy Collections
 
 Install the collections specified in `requirements.yml`.
