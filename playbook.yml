@@ -51,11 +51,11 @@
         pkg:
           - acl
           - apache2-utils
+          - bash-completion
           - containerd.io
           - docker-ce
           - docker-ce-cli
           - docker-compose-plugin
-          - fail2ban
           - git
           - net-tools
           - prometheus-node-exporter
@@ -119,7 +119,8 @@
         - { path: /srv/docker/, owner: "{{ admin_user }}", group: "{{ admin_user }}" }
         - { path: /srv/docker/compose, owner: "{{ admin_user }}", group: "{{ admin_user }}" }
         - { path: /srv/docker/compose/reverse-proxy, owner: "{{ admin_user }}", group: "{{ admin_user }}" }
-        - { path: /srv/docker/compose/jakeprice.dev/hugo, owner: "{{ admin_user }}", group: "{{ admin_user }}" }
+        - { path: /srv/docker/compose/jakeprice.dev/hugo/public, owner: "{{ admin_user }}", group: "{{ admin_user }}" }
+        - { path: /srv/docker/compose/analytics.jakeprice.dev, owner: "{{ admin_user }}", group: "{{ admin_user }}" }
     
     - name: Create symbolic links
       file:
@@ -135,6 +136,8 @@
       copy:
         src: /home/jprice/my/files/code/jakeprice.dev/public
         dest: /srv/docker/compose/jakeprice.dev/hugo
+        owner: "{{ admin_user }}"
+        group: "{{ admin_user }}"
 
     - name: Check Docker is started
       ansible.builtin.systemd:
@@ -142,7 +145,6 @@
         state: restarted
       with_items:
         - { name: docker }
-        - { name: fail2ban }
         - { name: sshd }
 
     - name: Create Docker network
